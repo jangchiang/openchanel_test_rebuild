@@ -1,13 +1,18 @@
-// 0/alpha.water
-/*--------------------------------*- C++ -*----------------------------------*/
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  12                                    |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
 FoamFile
 {
     version     2.0;
     format      ascii;
     class       volScalarField;
-    location    "0";
     object      alpha.water;
 }
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [0 0 0 0 0 0 0];
 
@@ -24,18 +29,20 @@ boundaryField
     {
         type            zeroGradient;
     }
-    atmosphere
+    top
     {
         type            inletOutlet;
         inletValue      uniform 0;
         value           uniform 0;
     }
-    walls
+    bottom
     {
         type            zeroGradient;
     }
-    ballast
+    frontAndBack
     {
-        type            zeroGradient;
+        type            empty;
     }
 }
+
+// ************************************************************************* //

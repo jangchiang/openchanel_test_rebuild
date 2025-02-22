@@ -1,5 +1,10 @@
-// system/setFieldsDict
-/*--------------------------------*- C++ -*----------------------------------*/
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  12                                    |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
 FoamFile
 {
     version     2.0;
@@ -8,6 +13,7 @@ FoamFile
     location    "system";
     object      setFieldsDict;
 }
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 defaultFieldValues
 (
@@ -18,10 +24,12 @@ regions
 (
     boxToCell
     {
-        box (0 0 0) (5 0.15 0.409);  // Initial water height of 0.15m
+        box (0 0 0) (5 0.15 0.409);
         fieldValues
         (
             volScalarFieldValue alpha.water 1
         );
     }
 );
+
+// ************************************************************************* //
