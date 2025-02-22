@@ -1,0 +1,153 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  12                                    |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+// system/blockMeshDict
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+    location    "system";
+}
+
+convertToMeters 1;
+
+// Mesh resolution
+nx1 200;  // Before ballast
+nx2 100;  // Ballast region
+nx3 200;  // After ballast
+ny  100;  // Vertical resolution
+nz  1;    // 2D simulation
+
+vertices
+(
+    // Main channel vertices (0-7)
+    (0    0    0)
+    (2    0    0)
+    (2    0.5  0)
+    (0    0.5  0)
+    (0    0    0.409)
+    (2    0    0.409)
+    (2    0.5  0.409)
+    (0    0.5  0.409)
+
+    // Ballast section vertices (8-15)
+    (2    0    0)
+    (3    0    0)
+    (3    0.5  0)
+    (2    0.5  0)
+    (2    0    0.409)
+    (3    0    0.409)
+    (3    0.5  0.409)
+    (2    0.5  0.409)
+
+    // Exit section vertices (16-23)
+    (3    0    0)
+    (5    0    0)
+    (5    0.5  0)
+    (3    0.5  0)
+    (3    0    0.409)
+    (5    0    0.409)
+    (5    0.5  0.409)
+    (3    0.5  0.409)
+
+    // Ballast trapezoid vertices (approximate shape)
+    (2.2  0.05  0)
+    (2.8  0.05  0)
+    (2.7  0.2   0)
+    (2.3  0.2   0)
+    (2.2  0.05  0.409)
+    (2.8  0.05  0.409)
+    (2.7  0.2   0.409)
+    (2.3  0.2   0.409)
+);
+
+blocks
+(
+    // Inlet section
+    hex (0 1 2 3 4 5 6 7) ($nx1 $ny $nz) simpleGrading (1 1 1)
+    
+    // Ballast section
+    hex (8 9 10 11 12 13 14 15) ($nx2 $ny $nz) simpleGrading (1 1 1)
+    
+    // Exit section
+    hex (16 17 18 19 20 21 22 23) ($nx3 $ny $nz) simpleGrading (1 1 1)
+    
+    // Ballast block (simplified trapezoid)
+    hex (24 25 26 27 28 29 30 31) ($nx2 $ny $nz) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+{
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 4 7 3)
+        );
+    }
+
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (17 21 22 18)
+        );
+    }
+
+    atmosphere
+    {
+        type patch;
+        faces
+        (
+            (3 7 6 2)
+            (11 15 14 10)
+            (19 23 22 18)
+        );
+    }
+
+    walls
+    {
+        type wall;
+        faces
+        (
+            // Bottom walls
+            (0 1 5 4)
+            (8 9 13 12)
+            (16 17 21 20)
+            
+            // Side walls (front and back for 2D)
+            (0 3 2 1)
+            (4 5 6 7)
+            (8 11 10 9)
+            (12 13 14 15)
+            (16 19 18 17)
+            (20 21 22 23)
+        );
+    }
+
+    ballast
+    {
+        type wall;
+        faces
+        (
+            // Ballast surfaces
+            (24 25 29 28)
+            (25 26 30 29)
+            (26 27 31 30)
+            (27 24 28 31)
+        );
+    }
+}
