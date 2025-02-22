@@ -1,13 +1,19 @@
 // 0/epsilon
-/*--------------------------------*- C++ -*----------------------------------*/
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  12                                    |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
 FoamFile
 {
     version     2.0;
     format      ascii;
     class       volScalarField;
-    location    "0";
     object      epsilon;
 }
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [0 2 -3 0 0 0 0];
 
@@ -30,14 +36,13 @@ boundaryField
         inletValue      uniform 0.1;
         value           uniform 0.1;
     }
-    walls
+    bottom
     {
         type            epsilonWallFunction;
         value           uniform 0.1;
     }
-    ballast
+    frontAndBack
     {
-        type            epsilonWallFunction;
-        value           uniform 0.1;
+        type            empty;
     }
 }
