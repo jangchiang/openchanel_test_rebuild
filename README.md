@@ -34,14 +34,11 @@ mkdir openChannel2D
 cd openChannel2D
 
 # Download setup and simulation scripts
-wget [repository-url]/setupCase.sh
 wget [repository-url]/runSimulation.sh
 
 # Make scripts executable
-chmod +x setupCase.sh runSimulation.sh
+chmod +x  runSimulation.sh
 
-# Run setup script
-./setupCase.sh
 ```
 
 ## Project Structure
