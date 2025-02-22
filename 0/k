@@ -1,10 +1,4 @@
 /*--------------------------------*- C++ -*----------------------------------*\
-| =========                 |                                                 |
-| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  12                                    |
-|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
-|    \\/     M anipulation  |                                                 |
-\*---------------------------------------------------------------------------*/
 FoamFile
 {
     version     2.0;
@@ -44,6 +38,9 @@ boundaryField
     {
         type            empty;
     }
+    ballast
+    {
+        type            kqRWallFunction;
+        value           uniform 0.1;
+    }
 }
-
-// ************************************************************************* //

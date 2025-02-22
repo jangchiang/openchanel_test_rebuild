@@ -38,4 +38,9 @@ boundaryField
     {
         type            empty;
     }
+    ballast
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
 }

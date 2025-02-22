@@ -1,4 +1,3 @@
-// 0/U
 /*--------------------------------*- C++ -*----------------------------------*\
 FoamFile
 {
@@ -36,5 +35,9 @@ boundaryField
     frontAndBack
     {
         type            empty;
+    }
+    ballast
+    {
+        type            noSlip;
     }
 }

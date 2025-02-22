@@ -1,4 +1,3 @@
-// 0/p_rgh
 /*--------------------------------*- C++ -*----------------------------------*\
 FoamFile
 {
@@ -44,5 +43,10 @@ boundaryField
     frontAndBack
     {
         type            empty;
+    }
+    ballast
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;
     }
 }
